@@ -12,26 +12,23 @@ Cílem projektu je zobrazit v grafech a tabulkách údaje o zaměstnancích spol
 
 ### Jednotlivé kroky projektu
 1. Úprava přidělených dat, příprava nových sloupců pro následné grafické zobrazení počtu odpracovaných let a počtu propuštěných a stále pracujících osob.
+2. Vytvoření pomocných sheetů pro PivotTables a následné vytvoření PivotCharts.
+3. Vytvoření sheetu s názvem report obsahující přehladné grafy zobrazující informace o zaměstnancích.
+4. Vytvoření sheetu pro grafické zobrazení tabulek s údaji o zaměstnancích.
+5. Úprava slicerů a grafické podoby dashboardu.
 
+</br>
 
-Navázání dvou tabulek (uzemi_kod pro obě dvě tabulky shodný, data_kraj znázorňuje tabulka obsahující kraje ČR dle územních kódů, č. 2 značí druhý sloupec obsahující názvy krajů):
+IF podmínka pro zobrazení počtu odpracovaných let.
 ```
-=IFERROR(VLOOKUP([@[uzemi_kod]];data_kraj;2;FALSE);"neurceno")
-```
-Filtrování nulových hodnot, v dané tabulce souhrnné hodnoty po jednotlivá území:
-```
-=IF([@[stav_txt]]<>"";1;0)
+=IF([@[months_from_entry]]<3;"zkušební doba";IF(AND([@[months_from_entry]]>=3;[@[months_from_entry]]<12);"3měs. - 1rok";IF(AND([@[months_from_entry]]>=12;[@[months_from_entry]]<36);"1rok - 3roky";IF(AND([@[months_from_entry]]>=36;[@[months_from_entry]]<60);"3 roky - 5 let";IF(AND([@[months_from_entry]]>=60;[@[months_from_entry]]<120);"5 let - 10 let";"deset a více let")))))
 ```
 
+### Grafické znázornění údajů o zaměstnancích.
 
-### Grafické znázornění rodinného stavu v Čr a krajích v roce 2021
 
-<br />
-
-![My Image](pic/marital-cz.png)
-![My Image](pic/marital-cz-p.png)
-<br />
-
-![My Image](pic/marital-dist.png)
-![My Image](pic/marital-dist-p.png)
+![My Image](pic/uvazek.png)
+![My Image](pic/roky.png)
+![My Image](pic/nastupodchod.png)
+![My Image](pic/tabulka.png)
 
